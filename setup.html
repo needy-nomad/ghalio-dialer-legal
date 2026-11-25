@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ghalio Dialer — Tester Setup &amp; Usage Guide</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --card: #f5f7f5;
+    --fg: #1d1f1d;
+    --muted: #555b55;
+    --accent: #1b5e20;
+    --accent-soft: #e8f5e9;
+    --border: #dfe5df;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121412;
+      --card: #1b1f1b;
+      --fg: #e8ece8;
+      --muted: #a9b0a9;
+      --accent: #81c784;
+      --accent-soft: #1b3320;
+      --border: #2c332c;
+    }
+  }
+  body { background: var(--bg); color: var(--fg); font: 16px/1.6 system-ui, -apple-system, sans-serif; margin: 0; padding: 28px 16px 56px; }
+  main { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 1.7rem; margin: 0 0 6px; }
+  h2 { font-size: 1.2rem; margin-top: 28px; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  h3 { font-size: 1.02rem; margin: 18px 0 6px; }
+  p, li { color: var(--fg); }
+  .muted { color: var(--muted); }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; margin: 14px 0; }
+  .note { background: var(--accent-soft); border-left: 4px solid var(--accent); border-radius: 8px; padding: 12px 16px; margin: 14px 0; }
+  code { background: var(--card); border: 1px solid var(--border); border-radius: 5px; padding: 2px 6px; font-size: 0.92em; }
+  a { color: var(--accent); font-weight: 600; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  ol, ul { padding-left: 22px; }
+  li { margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Ghalio Dialer — Setup &amp; Quick Start Guide</h1>
+  <p class="muted">Applies to Ghalio Dialer v0.3.2 (<code>com.ghalio.dialer</code>) · Android 13–17</p>
+
+  <div class="note">
+    <strong>Why Wireless debugging setup is needed once:</strong><br>
+    Android prevents normal apps from injecting audio directly into a cellular phone call. Ghalio Dialer pairs once with your phone's built-in <strong>Wireless debugging</strong> (on-device <code>127.0.0.1</code> only — nothing leaves your phone, no extra app like Shizuku is needed) so its local voice service can process call audio cleanly.
+  </div>
+
+  <h2>Step 1 — Install from Google Play Internal Testing</h2>
+  <ol>
+    <li>Make sure your Gmail address is added to the test list.</li>
+    <li>Open the tester opt-in link on your Android phone:<br>
+      <a href="https://play.google.com/apps/internaltest/4698960626144825156">https://play.google.com/apps/internaltest/4698960626144825156</a>
+    </li>
+    <li>Tap <strong>Accept invite</strong> → <strong>Download it on Google Play</strong> → <strong>Install</strong>.<br>
+      <span class="muted">(If you previously sideloaded an APK build of Ghalio Dialer, uninstall that sideloaded build first so Google Play's signed version can install.)</span>
+    </li>
+  </ol>
+
+  <h2>Step 2 — Default Phone App &amp; Basic Permissions</h2>
+  <ol>
+    <li>Open <strong>Ghalio Dialer</strong> and tap <strong>Voice filter setup</strong> (from the prompt or <strong>3 dots → Settings → Setup and phone check</strong>).</li>
+    <li>Complete <strong>Step 1: Default phone app</strong> → select <strong>Ghalio Dialer</strong>.</li>
+    <li>Grant <strong>Contacts</strong> (to distinguish unknown callers from saved contacts), <strong>Microphone</strong> (for Live Voice Filter &amp; voice previews), and <strong>Notifications</strong> (used to enter the pairing code).</li>
+  </ol>
+
+  <h2>Step 3 — One-Time Wireless Debugging Pairing</h2>
+  <div class="card">
+    <strong>Enable Developer options (if not already enabled):</strong>
+    <ol>
+      <li>Open Android <strong>Settings → About phone</strong> (on Xiaomi HyperOS: tap <strong>OS version</strong> 7 times; on stock/other phones: tap <strong>Build number</strong> 7 times).</li>
+      <li>Connect your phone to <strong>Wi-Fi</strong>.</li>
+      <li>Go to <strong>Settings → Additional settings / System → Developer options</strong> and turn ON <strong>Wireless debugging</strong>.<br>
+        <span class="muted">Realme / ColorOS / OnePlus note: also turn ON <strong>Disable permission monitoring</strong> in Developer options.</span>
+      </li>
+    </ol>
+  </div>
+  <ol>
+    <li>Open <strong>Ghalio Dialer → Voice filter setup → Step 4: Voice service</strong> and tap <strong>Pair</strong>. A pairing notification will appear.</li>
+    <li>Open Android <strong>Developer options → Wireless debugging</strong> and tap <strong>Pair device with pairing code</strong> (keep that 6-digit code window visible).</li>
+    <li>Swipe down the notification shade, tap <strong>Enter code</strong> on the Ghalio Dialer notification, type the 6-digit code, and send.</li>
+    <li>Return to Ghalio Dialer Setup → wait a few seconds for the voice service to connect → tap <strong>Run check</strong> (verifies your phone's call-audio support) → tap <strong>Turn on voice filter</strong>.</li>
+  </ol>
+
+  <h2>Step 4 — Using 1-Tap Controls During Calls</h2>
+  <ul>
+    <li><strong>Incoming Call Screen (Before Answering):</strong> Tap one of the 3 pills right above the Answer button — <code>Normal</code>, <code>Filter</code> (or current preset like <code>Deep ▾</code>), or <code>Phrases</code> — before swiping/tapping Answer.</li>
+    <li><strong>Filter Button (Live Voice Filter):</strong> 1 tap toggles <strong>Live Voice Filter ↔ Normal voice</strong>. Long-press the <strong>Filter</strong> button (or tap <code>Voice filter on: Deep ▾</code>) to pick another preset (<em>Deep, Robot, Custom</em>).<br>
+      <span class="muted">Note: Live Voice Filter requires a phone that supports hardware call-screening mode (e.g., Qualcomm Snapdragon / Xiaomi 17). On devices where the chipset blocks hardware call screening, use Speak for me (Phrases) below.</span>
+    </li>
+    <li><strong>Phrases Button (Speak for me):</strong> 1 tap switches to <strong>Speak for me</strong> and opens the quick-phrase drawer — tap any ready English/Hindi phrase or type custom text to speak cleanly to the caller while your microphone stays muted.</li>
+    <li><strong>1-Tap Return to Normal Voice:</strong> While in Filter or Phrases, tap the active <strong>Filter</strong> button, active <strong>Phrases</strong> button, <strong>Normal</strong> inside the Phrases drawer, or the call <strong>Mute</strong> button — any of these puts your Normal voice back on the line in 1 tap.</li>
+  </ul>
+
+  <h2>After a Phone Reboot</h2>
+  <p>Android automatically turns <strong>Wireless debugging</strong> off whenever your phone restarts. You do <strong>not</strong> need to enter the pairing code again:</p>
+  <ol>
+    <li>Make sure Wi-Fi is connected.</li>
+    <li>Turn ON <strong>Developer options → Wireless debugging</strong>.</li>
+    <li>Open <strong>Ghalio Dialer</strong> once — the voice service reconnects automatically in a couple of seconds.</li>
+  </ol>
+
+  <h2>Privacy &amp; Support</h2>
+  <p>100% of audio filtering, TTS speech generation, and call metadata stays on your device. Read the <a href="./">Privacy Policy</a> or contact <a href="mailto:contactus@ghalio.com">contactus@ghalio.com</a>.</p>
+</main>
+</body>
+</html>
